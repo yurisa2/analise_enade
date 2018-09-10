@@ -109,41 +109,50 @@ AND : MIN;
 OR : MAX;
 ACT : MIN;
 
-RULE 1 : if questao4 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 2 : if questao4 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 3 : if questao4 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 4 : if questao4 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 5 : if questao4 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 6 : if questao5 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 7 : if questao5 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 8 : if questao5 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 9 : if questao5 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 10 : if questao5 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 11 : if questao6 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 12 : if questao6 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 13 : if questao6 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 14 : if questao6 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 15 : if questao6 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 16 : if questao7 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 17 : if questao7 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 18 : if questao7 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 19 : if questao7 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 20 : if questao7 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 21 : if questao8 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 22 : if questao8 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 23 : if questao8 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 24 : if questao8 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 25 : if questao8 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 26 : if questao9 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 27 : if questao9 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 28 : if questao9 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 29 : if questao9 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 30 : if questao9 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 31 : if questao10 is DT then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 32 : if questao10 is DP then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 33 : if questao10 is NSR then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 34 : if questao10 is CPA then AjudarInstituicao is Pouco and TestaAluno is Moderado
-RULE 35 : if questao10 is CPL then AjudarInstituicao is Pouco and TestaAluno is Moderado
+RULE 1 : if questao4 is DT then AjudarInstituicao is Pouco
+RULE 2 : if questao4 is DP then AjudarInstituicao is Moderado
+RULE 3 : if questao4 is NSR then AjudarInstituicao is Razoavel
+RULE 4 : if questao4 is CPA then AjudarInstituicao is Elevado
+RULE 5 : if questao4 is CPL then AjudarInstituicao is Muito
+
+RULE 6 : if questao5 is DT then AjudarInstituicao is Moderado
+RULE 7 : if questao5 is DP then AjudarInstituicao is Razoavel
+RULE 8 : if questao5 is NSR then AjudarInstituicao is Razoavel
+RULE 9 : if questao5 is CPA then AjudarInstituicao is Razoavel
+RULE 10 : if questao5 is CPL then AjudarInstituicao is Elevado
+
+RULE 11 : if questao6 is DT then AjudarInstituicao is Pouco and TestaAluno is Pouco
+RULE 12 : if questao6 is DP then AjudarInstituicao is Moderado and TestaAluno is Moderado
+RULE 13 : if questao6 is NSR then AjudarInstituicao is Razoavel and TestaAluno is Razoavel
+RULE 14 : if questao6 is CPA then AjudarInstituicao is Elevado and TestaAluno is Elevado
+RULE 15 : if questao6 is CPL then AjudarInstituicao is Muito and TestaAluno is Muito
+
+
+RULE 16 : if questao7 is DT then TestaAluno is Pouco
+RULE 17 : if questao7 is DP then TestaAluno is Moderado
+RULE 18 : if questao7 is NSR then TestaAluno is Razoavel
+RULE 19 : if questao7 is CPA then TestaAluno is Elevado
+RULE 20 : if questao7 is CPL then TestaAluno is Muito
+
+RULE 21 : if questao8 is DT then AjudarInstituicao is Moderado and TestaAluno is Pouco
+RULE 22 : if questao8 is DP then AjudarInstituicao is Razoavel and TestaAluno is Moderado
+RULE 23 : if questao8 is NSR then AjudarInstituicao is Razoavel and TestaAluno is Razoavel
+RULE 24 : if questao8 is CPA then AjudarInstituicao is Razoavel and TestaAluno is Elevado
+RULE 25 : if questao8 is CPL then AjudarInstituicao is Elevado and TestaAluno is Muito
+
+
+RULE 26 : if questao9 is DT then AjudarInstituicao is Pouco
+RULE 27 : if questao9 is DP then AjudarInstituicao is Moderado
+RULE 28 : if questao9 is NSR then AjudarInstituicao is Razoavel
+RULE 29 : if questao9 is CPA then AjudarInstituicao is Elevado
+RULE 30 : if questao9 is CPL then AjudarInstituicao is Muito
+
+RULE 31 : if questao10 is DT then AjudarInstituicao is Moderado and TestaAluno is Pouco
+RULE 32 : if questao10 is DP then AjudarInstituicao is Razoavel and TestaAluno is Moderado
+RULE 33 : if questao10 is NSR then AjudarInstituicao is Razoavel and TestaAluno is Razoavel
+RULE 34 : if questao10 is CPA then AjudarInstituicao is Razoavel and TestaAluno is Elevado
+RULE 35 : if questao10 is CPL then AjudarInstituicao is Elevado and TestaAluno is Muito
+
 
 
 
