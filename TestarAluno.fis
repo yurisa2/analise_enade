@@ -1,0 +1,116 @@
+[System]
+Name='TestarAluno'
+Type='mamdani'
+Version=3.1
+NumInputs=7
+NumOutputs=1
+NumRules=20
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='questao4'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input2]
+Name='questao5'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input3]
+Name='questao6'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input4]
+Name='questao7'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input5]
+Name='questao8'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input6]
+Name='questao9'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+[Input7]
+Name='questao10'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='CPL':'trimf',[0.750 1.000 1.000]
+MF2='CPA':'trimf',[0.500 0.750 1.000]
+MF3='NSR':'trimf',[0.250 0.500 0.750]
+MF4='DP':'trimf',[0.000 0.250 0.500]
+MF5='DT':'trimf',[0.000 0.000 0.250]
+
+
+[Output1]
+Name='TestaAluno'
+Range=[0.000 1.000]
+NumMFs=5
+MF1='Pouco':'trimf',[0.000 0.000 0.250]
+MF2='Moderado':'trimf',[0.000 0.250 0.500]
+MF3='Razoavel':'trimf',[0.250 0.500 0.750]
+MF4='Elevado':'trimf',[0.500 0.750 1.000]
+MF5='Muito':'trimf',[0.750 1.000 1.000]
+
+
+[Rules]
+0 0 1 0 0 0 0 , 1 (1) : 1
+0 0 2 0 0 0 0 , 2 (1) : 1
+0 0 3 0 0 0 0 , 3 (1) : 1
+0 0 4 0 0 0 0 , 4 (1) : 1
+0 0 5 0 0 0 0 , 5 (1) : 1
+0 0 0 1 0 0 0 , 1 (1) : 1
+0 0 0 2 0 0 0 , 2 (1) : 1
+0 0 0 3 0 0 0 , 3 (1) : 1
+0 0 0 4 0 0 0 , 4 (1) : 1
+0 0 0 5 0 0 0 , 5 (1) : 1
+0 0 0 0 1 0 0 , 1 (1) : 1
+0 0 0 0 2 0 0 , 2 (1) : 1
+0 0 0 0 3 0 0 , 3 (1) : 1
+0 0 0 0 4 0 0 , 4 (1) : 1
+0 0 0 0 5 0 0 , 5 (1) : 1
+0 0 0 0 0 0 1 , 1 (1) : 1
+0 0 0 0 0 0 2 , 2 (1) : 1
+0 0 0 0 0 0 3 , 3 (1) : 1
+0 0 0 0 0 0 4 , 4 (1) : 1
+0 0 0 0 0 0 5 , 5 (1) : 1
