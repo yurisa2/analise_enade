@@ -93,14 +93,14 @@ create_Quantitativas_Plots <- function(obj_,set) {
     # jpeg(filename)
 
     x <- as.numeric(obj_[ ,i])
-    h <- hist(x, plot = FALSE)
+    h <- hist(x, plot = FALSE, breaks = 10)
 
     plot(h,
       main={paste(strtrim(labels[1,i+3],30),"...")},
       xlab=paste("Respostas Quantitativas - ",set),
       border="black",
       col=col_colors[i+3],
-      xlim=c(min(obj_[ ,i]),max(obj_[ ,i])),
+      xlim=c(0,1),
       ylim=c(0,nrow(obj_))
     )
     xfit<-seq(min(x, na.rm = T),max(x, na.rm = T),length=length(x))
