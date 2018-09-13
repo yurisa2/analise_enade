@@ -62,48 +62,53 @@ get_fuzzy_res <- function(obj_) {
 
 
 create_Categoricas_Plots <- function(obj_,set) {
+  filename <- paste("Respostas Categoricas - ",set,".png")
+  png(filename, width = 640, height = 896)
+  par(mfrow=c(4,2))
   for(i in cols_enade) {
-    filename <- paste(set,"-Respostas Categoricas",colnames(obj_)[i],".jpg")
-    jpeg(filename)
     x <- as.numeric(obj_[ ,i])
     h <- hist(x, plot = FALSE)
     h$counts <- h$counts/sum(h$counts)
 
     plot(h,
-      main={paste(strtrim(labels[1,i],50),"...")},
-      xlab="Respostas Categoricas",
+      main={paste(strtrim(labels[1,i],30),"...")},
+      xlab=paste("Respostas Categoricas - ",set),
       ylab="Porcentagem",
       border="black",
       col=col_colors[i],
       xlim=c(1,5),
       ylim=c(0,1)
     )
-    dev.off()
   }
+  dev.off()
 }
 
 create_Quantitativas_Plots <- function(obj_,set) {
-  for(i in 1:ncol(obj_)) {
-    filename <- paste(set,"-Respostas Quantitativas",colnames(obj_)[i],".jpg")
-    jpeg(filename)
+  filename <- paste("Respostas Quantitativas - ",set,".png")
+    png(filename, width = 640, height = 480)
+    par(mfrow=c(2,1))
+
+  for(i in 8:9) {
+    # filename <- paste("Respostas Quantitativas - ",set,colnames(obj_)[i],".png")
+    # jpeg(filename)
 
     x <- as.numeric(obj_[ ,i])
     h <- hist(x, plot = FALSE)
 
     plot(h,
-      main={paste(strtrim(labels[1,i],50),"...")},
+      main={paste(strtrim(labels[1,i+3],30),"...")},
       xlab=paste("Respostas Quantitativas - ",set),
       border="black",
       col=col_colors[i+3],
-      xlim=c(0,1),
+      xlim=c(min(obj_[ ,i]),max(obj_[ ,i])),
       ylim=c(0,nrow(obj_))
     )
     xfit<-seq(min(x, na.rm = T),max(x, na.rm = T),length=length(x))
     yfit<-dnorm(xfit,mean=mean(x),sd=sd(x))
     yfit <- yfit*diff(h$mids[1:2])*length(x)
     lines(xfit, yfit, col="blue", lwd=2)
-    dev.off()
   }
+  dev.off()
 }
 
 ########### GET FUZZY RESULTS
@@ -115,17 +120,19 @@ res_total_setimo <- get_fuzzy_res(total_setimo)
 res_total_primeiro <- get_fuzzy_res(total_primeiro)
 
 ########### GET create_Quantitativas_Plots
-create_Quantitativas_Plots(total,"Geral")
-create_Quantitativas_Plots(total_masculino,"Masculino")
-create_Quantitativas_Plots(total_feminino,"Feminino")
-create_Quantitativas_Plots(total_oitavo,"8o. Semestre")
-create_Quantitativas_Plots(total_setimo,"7o. Semestre")
-create_Quantitativas_Plots(total_primeiro,"1o. Semestre")
-
-########### GET create_Quantitativas_Plots
 create_Categoricas_Plots(total,"Geral")
 create_Categoricas_Plots(total_masculino,"Masculino")
 create_Categoricas_Plots(total_feminino,"Feminino")
 create_Categoricas_Plots(total_oitavo,"8o. Semestre")
 create_Categoricas_Plots(total_setimo,"7o. Semestre")
 create_Categoricas_Plots(total_primeiro,"1o. Semestre")
+
+########### GET create_Quantitativas_Plots
+create_Quantitativas_Plots(res_total,"Geral")
+create_Quantitativas_Plots(res_total_masculino,"Masculino")
+create_Quantitativas_Plots(res_total_feminino,"Feminino")
+create_Quantitativas_Plots(res_total_oitavo,"8o. Semestre")
+create_Quantitativas_Plots(res_total_setimo,"7o. Semestre")
+create_Quantitativas_Plots(res_total_primeiro,"1o. Semestre")
+
+boxplot(res_total[,8:9])
