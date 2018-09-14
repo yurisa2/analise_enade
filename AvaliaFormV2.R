@@ -1,8 +1,12 @@
 PATH <- "C:/Bitnami/wampstack-7.1.20-1/apache2/htdocs/analise_enade"
 setwd(PATH)
 
-library(FuzzyR)
+install.packages("gmodels")
 
+
+library(FuzzyR)
+library(lattice)
+library(gmodels)
 
 ########### AQUISICAO DOS DADOS
 r1a <- read.csv("1a.csv", header=T, stringsAsFactors=F)
@@ -83,6 +87,36 @@ create_Categoricas_Plots <- function(obj_,set) {
   dev.off()
 }
 
+
+
+factor_test <- total
+for(i in cols_enade)  factor_test[,i] <- factor(total[,i])
+str(factor_test)
+factor_test$Semestre <- factor(factor_test$Semestre)
+
+aggregate(data.frame(count = factor_test), by=list(factor_test$questao4), length)
+
+cros <- CrossTable(factor_test$Semestre,factor_test[,4],prop.r=FALSE,prop.t=FALSE,prop.chisq=FALSE,format="SPSS")
+library(ggplot2)
+
+ggplot(factor_test,aes(x=Semestre))+
+  geom_bar()+
+  facet_grid(~questao4)
+
+
+resposta_test1 <- aggregate(data.frame(resp = total[which(total$questao4==1),11]), list(semestre = total[which(total$questao4==1),11]), length)
+resposta_test2 <- aggregate(data.frame(resp = total[which(total$questao4==2),11]), list(semestre = total[which(total$questao4==2),11]), length)
+resposta_test3 <- aggregate(data.frame(resp = total[which(total$questao4==3),11]), list(semestre = total[which(total$questao4==3),11]), length)
+resposta_test4 <- aggregate(data.frame(resp = total[which(total$questao4==4),11]), list(semestre = total[which(total$questao4==4),11]), length)
+resposta_test5 <- aggregate(data.frame(resp = total[which(total$questao4==5),11]), list(semestre = total[which(total$questao4==5),11]), length)
+
+
+
+
+summary(factor_test)
+
+barplot(factor_test$questao4~factor_test$Semestre)
+
 create_Quantitativas_Plots <- function(obj_,set) {
   filename <- paste("Respostas Quantitativas - ",set,".png")
     png(filename, width = 640, height = 480)
@@ -134,5 +168,3 @@ create_Quantitativas_Plots(res_total_feminino,"Feminino")
 create_Quantitativas_Plots(res_total_oitavo,"8o. Semestre")
 create_Quantitativas_Plots(res_total_setimo,"7o. Semestre")
 create_Quantitativas_Plots(res_total_primeiro,"1o. Semestre")
-
-boxplot(res_total[,8:9])
