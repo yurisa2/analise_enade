@@ -8,13 +8,13 @@ library(FuzzyR)
 library(gmodels)
 
 ########### AQUISICAO DOS DADOS
-r1a <- read.csv("1a.csv", header=T, stringsAsFactors=F)
-r7a <- read.csv("7a.csv", header=T, stringsAsFactors=F)
-r7b <- read.csv("7b.csv", header=T, stringsAsFactors=F)
-r8a <- read.csv("8a.csv", header=T, stringsAsFactors=F)
-r8b <- read.csv("8b.csv", header=T, stringsAsFactors=F)
-r8c <- read.csv("8c.csv", header=T, stringsAsFactors=F)
-r8g <- read.csv("8g.csv", header=T, stringsAsFactors=F)
+r1a <- read.csv("db/1a.csv", header=T, stringsAsFactors=F)
+r7a <- read.csv("db/7a.csv", header=T, stringsAsFactors=F)
+r7b <- read.csv("db/7b.csv", header=T, stringsAsFactors=F)
+r8a <- read.csv("db/8a.csv", header=T, stringsAsFactors=F)
+r8b <- read.csv("db/8b.csv", header=T, stringsAsFactors=F)
+r8c <- read.csv("db/8c.csv", header=T, stringsAsFactors=F)
+r8g <- read.csv("db/8g.csv", header=T, stringsAsFactors=F)
 
 
 ########### SEPARACAO DE SETS
@@ -57,8 +57,8 @@ get_fuzzy_res <- function(obj_) {
   entrada_fuzzy <- as.matrix(obj_[,cols_enade])
   entrada_fuzzy <- (entrada_fuzzy - 1) * 0.25
 
-  TestarAluno_FIS <- readfis("TestarAluno.fis")
-  AjudarInstituicao_FIS <- readfis("AjudarInstituicao.fis")
+  TestarAluno_FIS <- readfis("fis/TestarAluno.fis")
+  AjudarInstituicao_FIS <- readfis("fis/AjudarInstituicao.fis")
 
   results <- cbind(entrada_fuzzy,evalfis(entrada_fuzzy,TestarAluno_FIS))
   colnames(results)[ncol(results)] <- "TestarAluno"
@@ -77,7 +77,7 @@ questoes_pctg <- list()
 
 
 create_Categoricas_Plots <- function(obj_,set) {
-  filename <- paste("Respostas Categoricas - ",set,".png")
+  filename <- paste("plots/Respostas Categoricas - ",set,".png")
   png(filename, width = 640, height = 896)
   par(mfrow=c(5,2))
 
@@ -103,7 +103,7 @@ create_Categoricas_Plots <- function(obj_,set) {
 
 
 create_Quantitativas_Plots <- function(obj_,set) {
-  filename <- paste("Respostas Quantitativas - ",set,".png")
+  filename <- paste("plots/Respostas Quantitativas - ",set,".png")
     png(filename, width = 640, height = 480)
     par(mfrow=c(2,1))
 
