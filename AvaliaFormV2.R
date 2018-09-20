@@ -1,15 +1,15 @@
 PATH <- "C:/Bitnami/wampstack-7.1.20-1/apache2/htdocs/analise_enade"
 setwd(PATH)
-
-install.packages("gmodels")
+# install.packages("FuzzyR")
 
 
 library(FuzzyR)
-library(lattice)
+# library(lattice)
 library(gmodels)
 
 ########### AQUISICAO DOS DADOS
 r1a <- read.csv("1a.csv", header=T, stringsAsFactors=F)
+r7a <- read.csv("7a.csv", header=T, stringsAsFactors=F)
 r7b <- read.csv("7b.csv", header=T, stringsAsFactors=F)
 r8a <- read.csv("8a.csv", header=T, stringsAsFactors=F)
 r8b <- read.csv("8b.csv", header=T, stringsAsFactors=F)
@@ -18,11 +18,11 @@ r8g <- read.csv("8g.csv", header=T, stringsAsFactors=F)
 
 
 ########### SEPARACAO DE SETS
-total <- rbind(r1a,r7b,r8a,r8b,r8c,r8g)
+total <- rbind(r1a,r7a,r7b,r8a,r8b,r8c,r8g)
 total_masculino <- total[total$questao1=="1",]
 total_feminino <- total[total$questao1=="2",]
 total_oitavo <- rbind(r8a,r8b,r8c,r8g)
-total_setimo <- r7b
+total_setimo <-  rbind(r7a,r7b)
 total_primeiro <- r1a
 ###########SETTINGS
 col_numeric <- ncol(total)-1
@@ -38,8 +38,10 @@ for(i in 1:col_numeric) {
   total_primeiro[,i] <- as.numeric(total_primeiro[,i])
 }
 
-########### LABELS DAS PERGUNTAS
+########### LABELS
 labels <- read.csv("labels.csv",stringsAsFactors=F)
+labels_resp <- c("CPL","CPA","NSR","DPA","DTL")
+
 
 ########### VETOR DAS CORES PARA AS BARRAS
 col_colors <- c("green","green","green","red","red","purple","blue","purple",
@@ -48,6 +50,9 @@ col_colors <- c("green","green","green","red","red","purple","blue","purple",
 
 
 ########### FUNCTIONS
+
+
+
 get_fuzzy_res <- function(obj_) {
   entrada_fuzzy <- as.matrix(obj_[,cols_enade])
   entrada_fuzzy <- (entrada_fuzzy - 1) * 0.25
@@ -64,58 +69,38 @@ get_fuzzy_res <- function(obj_) {
   return(results)
 }
 
+questoes_abs <- NULL
+questoes_abs <- list()
+questoes_pctg <- NULL
+questoes_pctg <- list()
+
+
 
 create_Categoricas_Plots <- function(obj_,set) {
   filename <- paste("Respostas Categoricas - ",set,".png")
   png(filename, width = 640, height = 896)
-  par(mfrow=c(4,2))
-  for(i in cols_enade) {
-    x <- as.numeric(obj_[ ,i])
-    h <- hist(x, plot = FALSE)
-    h$counts <- h$counts/sum(h$counts)
+  par(mfrow=c(5,2))
 
-    plot(h,
-      main={paste(strtrim(labels[1,i],30),"...")},
-      xlab=paste("Respostas Categoricas - ",set),
-      ylab="Porcentagem",
-      border="black",
-      col=col_colors[i],
-      xlim=c(1,5),
-      ylim=c(0,1)
-    )
+  for(i in 1:10)
+  {
+  cros <- CrossTable(obj_$Semestre,obj_[,i],prop.r=TRUE,prop.t=FALSE,prop.chisq=FALSE,format="SAS")
+  questoes_abs[i] <- list(cros$t)
+  questoes_pctg[i] <- list(round(cros$prop.row*100, digits=2))
+
+  barplot(questoes_pctg[[i]],
+    , main={paste(strtrim(labels[1,i],50),"...")}
+    , col=c("lightblue","lightgreen","lightyellow")
+    , beside=T
+    , legend = paste(rownames(questoes_abs[[i]]), "o. Semestre")
+    , ylim = c(0,100)
+    # ,names.arg=labels_resp
+  )
   }
   dev.off()
 }
 
 
 
-factor_test <- total
-for(i in cols_enade)  factor_test[,i] <- factor(total[,i])
-str(factor_test)
-factor_test$Semestre <- factor(factor_test$Semestre)
-
-aggregate(data.frame(count = factor_test), by=list(factor_test$questao4), length)
-
-cros <- CrossTable(factor_test$Semestre,factor_test[,4],prop.r=FALSE,prop.t=FALSE,prop.chisq=FALSE,format="SPSS")
-library(ggplot2)
-
-ggplot(factor_test,aes(x=Semestre))+
-  geom_bar()+
-  facet_grid(~questao4)
-
-
-resposta_test1 <- aggregate(data.frame(resp = total[which(total$questao4==1),11]), list(semestre = total[which(total$questao4==1),11]), length)
-resposta_test2 <- aggregate(data.frame(resp = total[which(total$questao4==2),11]), list(semestre = total[which(total$questao4==2),11]), length)
-resposta_test3 <- aggregate(data.frame(resp = total[which(total$questao4==3),11]), list(semestre = total[which(total$questao4==3),11]), length)
-resposta_test4 <- aggregate(data.frame(resp = total[which(total$questao4==4),11]), list(semestre = total[which(total$questao4==4),11]), length)
-resposta_test5 <- aggregate(data.frame(resp = total[which(total$questao4==5),11]), list(semestre = total[which(total$questao4==5),11]), length)
-
-
-
-
-summary(factor_test)
-
-barplot(factor_test$questao4~factor_test$Semestre)
 
 create_Quantitativas_Plots <- function(obj_,set) {
   filename <- paste("Respostas Quantitativas - ",set,".png")
@@ -157,9 +142,6 @@ res_total_primeiro <- get_fuzzy_res(total_primeiro)
 create_Categoricas_Plots(total,"Geral")
 create_Categoricas_Plots(total_masculino,"Masculino")
 create_Categoricas_Plots(total_feminino,"Feminino")
-create_Categoricas_Plots(total_oitavo,"8o. Semestre")
-create_Categoricas_Plots(total_setimo,"7o. Semestre")
-create_Categoricas_Plots(total_primeiro,"1o. Semestre")
 
 ########### GET create_Quantitativas_Plots
 create_Quantitativas_Plots(res_total,"Geral")
