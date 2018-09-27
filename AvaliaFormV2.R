@@ -39,7 +39,7 @@ for(i in 1:col_numeric) {
 }
 
 ########### LABELS
-labels <- read.csv("labels.csv",stringsAsFactors=F)
+labels <- read.csv("db/labels.csv",stringsAsFactors=F)
 labels_resp <- c("CPL","CPA","NSR","DPA","DTL")
 
 
@@ -64,6 +64,8 @@ get_fuzzy_res <- function(obj_) {
   colnames(results)[ncol(results)] <- "TestarAluno"
   results <- cbind(results,evalfis(entrada_fuzzy,AjudarInstituicao_FIS))
   colnames(results)[ncol(results)] <- "AjudarInstituicao"
+
+  plotmf(TestarAluno_FIS,"output",1)
 
   results <- data.frame(results)
   return(results)
