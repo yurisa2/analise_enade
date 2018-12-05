@@ -1,6 +1,5 @@
 PATH <- "C:/Bitnami/wampstack-7.1.20-1/apache2/htdocs/analise_enade"
 setwd(PATH)
-# install.packages("FuzzyR")
 
 
 library(FuzzyR)
