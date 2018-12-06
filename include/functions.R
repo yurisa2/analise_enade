@@ -57,8 +57,8 @@ create_fuzzy_rules <- function(dataset,features) {
     res_row[res_row >= 0.8] = 5
     res_row[res_row > 0.6 & res_row < 0.8 ] = 4
     res_row[res_row > 0.4 & res_row < 0.6 ] = 3
-    res_row[res_row > 0.2 & res_row < 0.4 ] = 2
-    res_row[res_row <= 0.2 ] = 1
+    res_row[res_row >= 0.2 & res_row < 0.4 ] = 2
+    res_row[res_row < 0.2 ] = 1
 
     total_col <- cbind(total_col,res_row)
     total_col <- cbind(total_col,1,1)

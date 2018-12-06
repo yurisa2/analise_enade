@@ -48,7 +48,7 @@ entrada[is.na(entrada)] <- 0.5
 
 source(file="include/functions.R")
 totalizante <- cbind(entrada,resultado=fuz_sis(total,cols_aji,entrada))
-hist(totalizante[,5])
+# hist(totalizante[,5])
 
 
 
@@ -60,3 +60,5 @@ entrada_aluno[is.na(entrada_aluno)] <- 0.5
 source(file="include/functions.R")
 totalizante_ta <- cbind(entrada_aluno,resultado=fuz_sis(total,cols_test_aluno,entrada_aluno))
 hist(totalizante_ta[,5])
+
+hist(create_fuzzy_rules(total,cols_aji))
