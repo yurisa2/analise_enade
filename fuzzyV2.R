@@ -13,7 +13,26 @@ summary(total)
 
 hist(total$X9..1)
 
+total_f <- NULL
+
 for(i in 1:ncol(total)) total[,i] <- as.numeric(total[,i])
 
 
-for(i in 2:ncol(total)) hist(total[,i],     main = paste("Histogram of" , colnames(total)[i]), breaks = c(1,2,3,4,5,6))
+
+for(i in 2:ncol(total)) {
+  g <- total[,i]
+  m <- mean(g)
+
+  std<-sqrt(var(g))
+
+  filename <- paste("plots/Segundo Enade ",i-1,".png")
+  png(filename, width = 640, height = 896)
+
+
+  hist(g,     main = paste("Histograma" , colnames(total)[i]), breaks = c(0,1,2,3,4,5), ylim = c(0,120))
+
+  curve(dnorm(x, mean=m, sd=std),
+        col="darkblue", lwd=2, add=TRUE, yaxt="n")
+
+  dev.off()
+}
