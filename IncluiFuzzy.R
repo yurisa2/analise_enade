@@ -48,7 +48,11 @@ entrada[is.na(entrada)] <- 0.5
 
 source(file="include/functions.R")
 totalizante <- cbind(entrada,resultado=fuz_sis(total,cols_aji,entrada))
+totalizante <- cbind(totalizante,normalize(totalizante[,5]))
+
+
 # hist(totalizante[,5])
+hist(totalizante[,6])
 
 
 
