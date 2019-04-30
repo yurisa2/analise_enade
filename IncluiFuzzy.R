@@ -1,11 +1,11 @@
-PATH <- "C:/Bitnami/wampstack-7.1.20-1/apache2/htdocs/analise_enade"
+PATH <- "/home/yurisa2/analise_enade"
 setwd(PATH)
 
 source(file="include/functions.R")
 
 library(FuzzyR)
 # library(lattice)
-library(gmodels)
+# library(gmodels)
 
 ########### AQUISICAO DOS DADOS
 r1a <- read.csv("db/1a.csv", header=T, stringsAsFactors=F)
@@ -27,6 +27,19 @@ total_primeiro <- r1a
 ###########SETTINGS
 col_numeric <- ncol(total)-1
 cols_enade <- 4:10
+
+q1 <- as.factor(total$questao1)
+q2 <- as.factor(total$questao2)
+q3 <- as.factor(total$questao3)
+
+q4 <- as.factor(total$questao4)
+q5 <- as.factor(total$questao5)
+q6 <- as.factor(total$questao6)
+q7 <- as.factor(total$questao7)
+q8 <- as.factor(total$questao8)
+q9 <- as.factor(total$questao9)
+q10 <- as.factor(total$questao10)
+summary(q1)
 
 cols_aji <- c(4,5,6,9)
 
